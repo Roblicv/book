@@ -1,9 +1,21 @@
-# La anomalía del potasio y el hierro
+# La teoría de los dos cuerpos
 
-Capítulo I, maquetado como página web de lectura. Tres archivos (`index.html`, `styles.css`, `script.js`) en la misma carpeta, sin dependencias salvo las fuentes de Google Fonts.
+Libro en formato web. Todos los archivos van juntos en la raíz del repositorio.
 
-## Voz humana (opcional)
-Si agregas un archivo `narracion.mp3` junto a `index.html`, el botón "Escuchar" lo usa en lugar de la voz del dispositivo.
+| Archivo | Qué es |
+|---|---|
+| `index.html` | Portada con el título y el índice de capítulos |
+| `capitulo-1.html` | Capítulo I: La anomalía del potasio y el hierro |
+| `capitulo-2.html` | Capítulo II: La divergencia de Lorenz |
+| `styles.css` | Diseño compartido por todo el libro |
+| `libro.js` | Comportamiento compartido (notas, etiquetas de quién habla, tamaño de texto) |
+| `capitulo-1.js` | Recuadros K y Fe, contador hacia el Nobel |
+| `capitulo-2.js`, `capitulo-2.css` | Línea temporal con decisiones en espiral |
+| `indice.js`, `indice.css` | Índice (capítulos bloqueados) |
 
-## Contador
-Cuenta hasta el miércoles 9 de octubre de 2047, 11:45 (Estocolmo), fecha estimada del anuncio del Nobel de Química. Para cambiarla, edita `TARGET` en `script.js`.
+## Actualizar en GitHub
+1. Sube los archivos modificados a la raíz (Add file > Upload files). Los que tienen el mismo nombre reemplazan a los anteriores.
+2. Borra `script.js`, que ya no se usa.
+
+## Agregar un capítulo nuevo
+Se copia `capitulo-2.html`, se cambia el texto y se enlaza desde `index.html` quitando el bloqueo de la fila correspondiente.
