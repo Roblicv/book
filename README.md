@@ -1,4 +1,4 @@
-# La teoría de los dos cuerpos
+# El problema de los dos cuerpos
 
 Libro en formato web. Todos los archivos van juntos en la raíz del repositorio.
 

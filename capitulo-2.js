@@ -40,10 +40,18 @@
     { x: 284, q: '¿Y si me quedo?', alt: 'Volver a casa', loops: 2, phase: 4.0, amp: 14 }
   ];
   var groups = [];
+  // Cada punto aparece justo cuando la línea (1,6 s, ease-in-out) llega a él, no antes
+  function bez(t, a, b) { return 3 * a * t * (1 - t) * (1 - t) + 3 * b * t * t * (1 - t) + t * t * t; }
+  function reach(frac) {
+    var lo = 0, hi = 1;
+    for (var i = 0; i < 30; i++) { var m = (lo + hi) / 2; if (bez(m, 0, 1) < frac) lo = m; else hi = m; }
+    var s = (lo + hi) / 2; return 1.6 * bez(s, 0.42, 0.58);
+  }
 
   pts.forEach(function (p) {
     var g = el('g', { 'class': 'tl-pt', tabindex: 0, role: 'button', 'aria-pressed': 'false', 'aria-label': p.q + ': abrir otra línea temporal' });
     var ex = p.x + DX, ey = Y + DY;
+    g.style.transitionDelay = Math.max(0, reach((p.x - 10) / 340) - 0.08).toFixed(2) + 's';
     var br = el('path', { 'class': 'tl-br', d: spiral(p.x, Y, ex, ey, p.loops, p.phase, p.amp), pathLength: 1 }, g);
     el('circle', { 'class': 'tl-end', cx: ex, cy: ey, r: 3.6 }, g);
     label(g, 'tl-alt', ex, ey + 20, p.alt);

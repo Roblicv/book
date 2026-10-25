@@ -7,7 +7,7 @@
 .tl-main { stroke: var(--ink); stroke-width: 1.2; opacity: .7; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s ease-in-out; }
 .timeline.ready .tl-main { stroke-dashoffset: 0; }
 
-.tl-pt { opacity: 0; transition: opacity .6s ease .9s; cursor: pointer; outline: none; }
+.tl-pt { opacity: 0; transition: opacity .35s ease; cursor: pointer; outline: none; }
 .timeline.ready .tl-pt { opacity: 1; }
 .tl-pt .dot { fill: var(--rust); stroke: var(--rust); stroke-width: 1.4; transition: fill .2s ease, stroke .2s ease, r .2s ease; }
 .tl-pt:hover .dot, .tl-pt:focus-visible .dot, .tl-pt.open .dot { fill: var(--hot); stroke: var(--hot); r: 6.5; }
