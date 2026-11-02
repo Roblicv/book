@@ -1,0 +1,26 @@
+/* Capítulo III: cita de Feynman */
+.book p.quote {
+  text-indent: 0; text-align: center; font-style: italic; margin: 1.6rem auto; max-width: 26rem;
+  font-size: 1.08em; line-height: 1.5; color: var(--rust);
+}
+.book p.quote + p { text-indent: 0; }
+
+/* Portada: diagrama de Feynman, un intercambio por día */
+:root { --hot: #E8702A; --violet: #7B4BB7; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --violet: #B38CF0; } }
+:root[data-theme="dark"] { --violet: #B38CF0; }
+.feyn { margin: 1.6rem auto 0; max-width: 24rem; }
+.feyn svg { width: 100%; height: auto; display: block; overflow: visible; cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; }
+.feyn svg:focus-visible { outline: 2px solid var(--rust); outline-offset: 6px; border-radius: 4px; }
+.feyn figcaption { margin: .5rem 0 0; text-align: center; font-style: italic; color: var(--muted); font-size: .92rem; min-height: 1.6em; }
+.feyn figcaption sup.fn { font-style: normal; }
+.fy-j { stroke: var(--hot); }
+.fy-k { stroke: var(--violet); }
+.fy-j, .fy-k { fill: none; stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.fy-ph { fill: none; stroke: var(--rust); stroke-width: 1.2; opacity: .85; }
+.fy-v { fill: var(--ink); }
+.fy-day { font-family: var(--display); font-size: 10.5px; font-style: italic; fill: var(--muted); paint-order: stroke; stroke: var(--paper); stroke-width: 3px; }
+.fy-name { font-family: var(--display); font-size: 11px; letter-spacing: .04em; fill: var(--muted); }
+.fy-new { animation: fyin .5s ease both; }
+@keyframes fyin { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .fy-new { animation: none; } }
