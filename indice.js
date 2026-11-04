@@ -11,13 +11,11 @@
   });
 })();
 
-/* Entrada animada: título letra por letra y luego el índice. Completa en la primera visita de la sesión; después, solo un fundido breve. */
+/* Entrada animada: título letra por letra y luego el índice, cada vez que se carga la página. */
 (function () {
   var root = document.documentElement;
   var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var seen = false;
-  try { seen = sessionStorage.getItem('libro-entrada') === '1'; sessionStorage.setItem('libro-entrada', '1'); } catch (e) {}
-  if (still || seen) { root.classList.remove('anim'); return; }
+  if (still) { root.classList.remove('anim'); return; }
   var h1 = document.querySelector('.cover h1'), i = 0;
   if (h1) {
     h1.setAttribute('aria-label', h1.textContent);
