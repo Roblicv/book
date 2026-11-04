@@ -257,3 +257,21 @@ sup.fn a:hover { text-decoration: underline; }
 @keyframes unfold { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 .opener h1 sup.fn { font-size: .42em; margin-left: .2em; vertical-align: super; }
 @media (prefers-reduced-motion: reduce) { .notes[open] ol { animation: none; } }
+
+/* Pie de página */
+.colophon {
+  max-width: 34rem; margin: 3.5rem auto 0; padding: 0 1rem 5rem; text-align: center;
+  font-family: var(--display); font-weight: 500; font-size: .8rem; letter-spacing: .22em; text-transform: uppercase; color: var(--muted);
+}
+.colophon p { margin: 0; }
+.colophon .yr { letter-spacing: .14em; }
+
+/* Transición entre páginas (navegadores compatibles; en los demás, la página cambia como siempre) */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-out .28s ease both; }
+::view-transition-new(root) { animation: vt-in .45s ease both; }
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}

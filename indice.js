@@ -10,3 +10,25 @@
     li.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); nudge(); } });
   });
 })();
+
+/* Entrada animada: título letra por letra y luego el índice. Completa en la primera visita de la sesión; después, solo un fundido breve. */
+(function () {
+  var root = document.documentElement;
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seen = false;
+  try { seen = sessionStorage.getItem('libro-entrada') === '1'; sessionStorage.setItem('libro-entrada', '1'); } catch (e) {}
+  if (still || seen) { root.classList.remove('anim'); return; }
+  var h1 = document.querySelector('.cover h1'), i = 0;
+  if (h1) {
+    h1.setAttribute('aria-label', h1.textContent);
+    h1.innerHTML = h1.textContent.split(' ').map(function (w) {
+      return '<span class="w" aria-hidden="true">' + w.split('').map(function (c) {
+        return '<span class="ch" style="transition-delay:' + (0.04 * i++).toFixed(2) + 's">' + c + '</span>';
+      }).join('') + '</span>';
+    }).join(' ');
+  }
+  var rows = document.querySelectorAll('.index h2, .index li, .colophon');
+  Array.prototype.forEach.call(rows, function (r, k) { r.style.transitionDelay = (1.1 + k * 0.09).toFixed(2) + 's'; });
+  requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.add('ready'); }); });
+  setTimeout(function () { Array.prototype.forEach.call(rows, function (r) { r.style.transitionDelay = ''; }); }, 2800);
+})();

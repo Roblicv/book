@@ -31,3 +31,23 @@
 .index li.shake { animation: shake .4s ease; }
 @media (max-width: 480px) { .index .row { grid-template-columns: 2.4rem minmax(0, 1fr); } .index .d, .index li.lock .d { grid-column: 2; text-align: left; justify-content: flex-start; margin-top: -.4rem; } }
 @media (prefers-reduced-motion: reduce) { .index li.shake { animation: none; } }
+
+/* Entrada: el título aparece letra por letra y luego el índice, fila por fila */
+.cover h1 .w { display: inline-block; white-space: nowrap; }
+.anim .cover h1 .ch { display: inline-block; opacity: 0; transform: translateY(.35em); filter: blur(4px); transition: opacity .7s ease, transform .7s ease, filter .7s ease; }
+.anim .index h2, .anim .index li, .anim .colophon { opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; }
+.anim.ready .cover h1 .ch, .anim.ready .index h2, .anim.ready .index li, .anim.ready .colophon { opacity: 1; transform: none; filter: none; }
+
+/* Capítulos por venir: un brillo suave recorre la barra */
+.index li.lock .bar { position: relative; overflow: hidden; }
+.index li.lock .bar::after {
+  content: ""; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--ink) 9%, transparent), transparent);
+  animation: shimmer 2.8s ease-in-out infinite;
+}
+.index li.lock:nth-child(5) .bar::after { animation-delay: .4s; }
+.index li.lock:nth-child(6) .bar::after { animation-delay: .8s; }
+@keyframes shimmer { to { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) { .index li.lock .bar::after { animation: none; } }
+.anim .index ol { border-bottom-color: transparent; transition: border-color .6s ease 1.8s; }
+.anim.ready .index ol { border-bottom-color: var(--rule); }
