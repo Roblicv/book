@@ -1,0 +1,36 @@
+/* Capítulo IV: piano de la portada */
+.book p.quote {
+  text-indent: 0; text-align: center; font-style: italic; margin: 1.6rem auto; max-width: 26rem;
+  font-size: 1.08em; line-height: 1.5; color: var(--rust);
+}
+.book p.quote + p { text-indent: 0; }
+
+.keys { margin: 1.8rem auto 0; max-width: 17rem; }
+.kb { position: relative; display: flex; height: 8.5rem; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+.kb button {
+  font: inherit; margin: 0; padding: 0; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: background-color .12s ease, transform .08s ease, box-shadow .12s ease;
+}
+.kb .w {
+  flex: 1; position: relative; border: 1px solid var(--ink); border-right-width: 0; border-radius: 0 0 4px 4px;
+  background: var(--paper); color: var(--muted); display: flex; align-items: flex-end; justify-content: center; padding-bottom: .55rem;
+  font-family: var(--display); font-size: .78rem; letter-spacing: .06em; transform-origin: top;
+}
+.kb .w:last-of-type { border-right-width: 1px; }
+.kb .b {
+  position: absolute; top: 0; width: 12%; height: 58%; transform: translateX(-50%); transform-origin: top;
+  background: var(--ink); border: 1px solid var(--ink); border-radius: 0 0 3px 3px; z-index: 2;
+}
+.kb .w.on { background: color-mix(in srgb, var(--rust) 18%, var(--paper)); color: var(--rust); transform: scaleY(.985); }
+.kb .b.on { background: var(--rust); border-color: var(--rust); transform: translateX(-50%) scaleY(.97); }
+.kb button:focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; z-index: 3; }
+.keys figcaption { margin: .7rem 0 0; text-align: center; font-style: italic; color: var(--muted); font-size: .92rem; min-height: 1.6em; }
+.keys figcaption sup.fn { font-style: normal; }
+@media (prefers-reduced-motion: reduce) { .kb button { transition: none; } }
+/* En modo oscuro las teclas conservan su orden real: blancas claras, negras oscuras */
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .kb .w { background: color-mix(in srgb, var(--ink) 10%, var(--paper)); }
+  :root:not([data-theme="light"]) .kb .b { background: #0B0B0E; border-color: color-mix(in srgb, var(--ink) 55%, transparent); } }
+:root[data-theme="dark"] .kb .w { background: color-mix(in srgb, var(--ink) 10%, var(--paper)); }
+:root[data-theme="dark"] .kb .b { background: #0B0B0E; border-color: color-mix(in srgb, var(--ink) 55%, transparent); }
+.kb .w.on { background: color-mix(in srgb, var(--rust) 22%, var(--paper)) !important; }
+.kb .b.on { background: var(--rust) !important; border-color: var(--rust) !important; }

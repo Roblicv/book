@@ -45,8 +45,8 @@
   background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--ink) 9%, transparent), transparent);
   animation: shimmer 2.8s ease-in-out infinite;
 }
-.index li.lock:nth-child(5) .bar::after { animation-delay: .4s; }
-.index li.lock:nth-child(6) .bar::after { animation-delay: .8s; }
+.index li.lock + li.lock .bar::after { animation-delay: .4s; }
+.index li.lock + li.lock + li.lock .bar::after { animation-delay: .8s; }
 @keyframes shimmer { to { transform: translateX(100%); } }
 @media (prefers-reduced-motion: reduce) { .index li.lock .bar::after { animation: none; } }
 .anim .index ol { border-bottom-color: transparent; transition: border-color .6s ease 1.8s; }
