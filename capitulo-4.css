@@ -34,3 +34,31 @@
 :root[data-theme="dark"] .kb .b { background: #0B0B0E; border-color: color-mix(in srgb, var(--ink) 55%, transparent); }
 .kb .w.on { background: color-mix(in srgb, var(--rust) 22%, var(--paper)) !important; }
 .kb .b.on { background: var(--rust) !important; border-color: var(--rust) !important; }
+
+/* Mazo de cartas: "una acumulación de cosas". Sin JavaScript se lee como una lista. */
+.cards { margin: 1.6rem auto; max-width: 17rem; }
+.book .cards p.card { text-indent: 0; text-align: center; margin: 0 0 .4rem; font-style: italic; }
+.book .cards p.card .c-n { display: none; }
+.cards.stack { position: relative; height: 11rem; margin: 2rem auto 0; cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
+.cards.stack:focus-visible .card[data-i="0"] { outline: 2px solid var(--rust); outline-offset: 4px; }
+.book .cards.stack p.card {
+  position: absolute; inset: 0; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .7rem;
+  padding: 1.2rem 1.4rem; background: var(--paper); border: 1px solid var(--rule); border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 18px -12px rgba(0,0,0,.35);
+  font-style: normal; transform-origin: 50% 100%;
+  transition: transform .45s cubic-bezier(.3,.7,.3,1), opacity .35s ease;
+}
+.book .cards.stack p.card .c-n { display: block; font-family: var(--display); font-weight: 600; font-size: .7rem; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
+.book .cards.stack .c-t { font-family: var(--display); font-size: 1.55rem; font-weight: 500; line-height: 1.2; color: var(--card-hot); }
+.cards.stack .card.out-r { transform: translate(42%, -6%) rotate(9deg) !important; opacity: 0 !important; }
+.cards.stack .card.out-l { transform: translate(-42%, -6%) rotate(-9deg) !important; opacity: 0 !important; }
+.cards.stack .card.jump { transition: none !important; }
+.cards-hint { text-align: center !important; text-indent: 0 !important; font-style: italic; color: var(--muted); font-size: .85rem; margin: 2.6rem 0 2.4rem !important; }
+@media (prefers-reduced-motion: reduce) { .book .cards.stack p.card { transition: none; } }
+
+/* Naranja: el texto de la carta y su borde superior. Y nada se sale de la página al volar la carta. */
+:root { --card-hot: #C2561A; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --card-hot: #E8702A; } }
+:root[data-theme="dark"] { --card-hot: #E8702A; }
+.book .cards.stack p.card { border-top: 3px solid var(--card-hot); }
+html, body { overflow-x: clip; }

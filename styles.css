@@ -275,3 +275,11 @@ sup.fn a:hover { text-decoration: underline; }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
 }
+
+/* Etiqueta de día bajo el separador */
+.book .brk:has(+ p.day) { margin-bottom: 1rem; }
+.book p.day {
+  text-indent: 0; text-align: center; margin: 0 0 2rem;
+  font-family: var(--display); font-weight: 600; font-size: .78rem; letter-spacing: .26em; text-transform: uppercase; color: var(--muted);
+}
+.book p.day + p { text-indent: 0; }

@@ -70,3 +70,48 @@
   });
   document.addEventListener('keyup', function (e) { var k = byKey[(e.key || '').toLowerCase()]; if (k) k.up(); });
 })();
+
+/* Mazo de cartas: al tocarlo, la carta de adelante sale y pasa al fondo del mazo */
+(function () {
+  var box = document.getElementById('cartas');
+  if (!box) return;
+  var cards = Array.prototype.slice.call(box.querySelectorAll('.card'));
+  var n = cards.length, order = cards.map(function (c, k) { return k; }), busy = false, flip = false;
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  box.classList.add('stack');
+  box.setAttribute('tabindex', '0');
+  box.setAttribute('role', 'button');
+  var hint = document.createElement('p');
+  hint.className = 'cards-hint'; hint.setAttribute('aria-hidden', 'true'); hint.textContent = 'Toca la carta para pasar a la siguiente.';
+  box.parentNode.insertBefore(hint, box.nextSibling);
+  function text(c) { return c.querySelector('.c-t').textContent.replace(/\.$/, ''); }
+  function layout() {
+    order.forEach(function (ci, pos) {
+      var c = cards[ci], d = Math.min(pos, 3);
+      c.setAttribute('data-i', pos);
+      c.style.zIndex = n - pos;
+      c.style.transform = 'translateY(' + (d * 9) + 'px) scale(' + (1 - d * 0.045) + ') rotate(' + (pos === 0 ? 0 : (pos % 2 ? -1.5 : 1.5)) + 'deg)';
+      c.style.opacity = pos > 3 ? 0 : 1;
+      c.setAttribute('aria-hidden', pos === 0 ? 'false' : 'true');
+    });
+    box.setAttribute('aria-label', 'Carta ' + (order[0] + 1) + ' de ' + n + ': ' + text(cards[order[0]]) + '. Activa para pasar a la siguiente.');
+  }
+  function next() {
+    if (busy) return;
+    var front = cards[order[0]];
+    if (still) { order.push(order.shift()); layout(); return; }
+    busy = true;
+    var dir = (flip = !flip) ? 'out-r' : 'out-l';
+    front.classList.add(dir);
+    setTimeout(function () {
+      front.classList.add('jump'); front.classList.remove(dir);
+      order.push(order.shift()); layout();
+      front.getBoundingClientRect();
+      front.classList.remove('jump');
+      busy = false;
+    }, 340);
+  }
+  layout();
+  box.addEventListener('click', next);
+  box.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); next(); } });
+})();
